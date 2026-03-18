@@ -1,0 +1,211 @@
+{
+  "missions": [
+    {
+      "mission_id": "arch-001-git-backup",
+      "title": "Git Backup \u2014 Workspace Private Repo",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-002-daily-log-format",
+      "title": "Standardize Daily Log Format",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-003-star-command-truth",
+      "title": "Star Command as Project State Truth",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-004-workspace-commit-routine",
+      "title": "Automated Workspace Commit Routine",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-005-memory-quality-review",
+      "title": "Memory Search Quality Audit",
+      "status": "planning",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-006-cross-channel-memory",
+      "title": "Cross-Channel Memory Consistency",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-007-matt-patterns-log",
+      "title": "Matt-Patterns Learning Log",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-008-research-memo-backfill",
+      "title": "Research Memo Backfill",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "arch-009-heartbeat-verify",
+      "title": "Heartbeat Recovery Verification",
+      "status": "completed",
+      "created_at": "2026-02-18 20:45:58",
+      "notes": "",
+      "updated_at": "2026-02-18 20:45:58"
+    },
+    {
+      "mission_id": "backup-secondary-001",
+      "title": "Secondary Backup Destination",
+      "status": "planning",
+      "created_at": "2026-02-18 23:23:52",
+      "notes": "",
+      "updated_at": "2026-02-18 23:23:52"
+    },
+    {
+      "mission_id": "mission-001",
+      "title": "Model selection & cost optimization",
+      "status": "completed",
+      "created_at": "2026-02-16 09:00:00",
+      "notes": "",
+      "updated_at": "2026-02-16 09:00:00"
+    },
+    {
+      "mission_id": "mission-002",
+      "title": "Hardware evaluation",
+      "status": "completed",
+      "created_at": "2026-02-16 11:00:00",
+      "notes": "",
+      "updated_at": "2026-02-16 11:00:00"
+    },
+    {
+      "mission_id": "mission-003",
+      "title": "Build Star Command (LifeOS)",
+      "status": "active",
+      "created_at": "2026-02-16 13:31:00",
+      "notes": "",
+      "updated_at": "2026-02-16 13:31:00"
+    },
+    {
+      "mission_id": "mission-004",
+      "title": "Income generation strategy",
+      "status": "planning",
+      "created_at": "2026-02-16 10:00:00",
+      "notes": "",
+      "updated_at": "2026-02-16 10:00:00"
+    },
+    {
+      "mission_id": "mission-compb-001",
+      "title": "Launch ModsPack MVP",
+      "status": "active",
+      "created_at": "2026-02-17T23:04:08.475006",
+      "notes": "",
+      "updated_at": "2026-02-17T23:04:08.475006"
+    },
+    {
+      "mission_id": "mission-compb-002",
+      "title": "Orphan Corrugated Marketplace",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-003",
+      "title": "Truckload Density Calculator",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-004",
+      "title": "Stack Strength Calculator",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-005",
+      "title": "Scope of Work Assistant",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-006",
+      "title": "Forecasting & Planning Assistant",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-007",
+      "title": "ISTA Packaging Lab Simulator",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-008",
+      "title": "AI Packaging Engineer",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "mission-compb-009",
+      "title": "Lead Generator & Converting Assistant",
+      "status": "planning",
+      "created_at": "2026-02-17T23:17:36.628675",
+      "notes": "",
+      "updated_at": "2026-02-17T23:17:36.628675"
+    },
+    {
+      "mission_id": "model-overhaul",
+      "title": "Model Routing Overhaul Session",
+      "status": "planning",
+      "created_at": "2026-02-18 20:31:38",
+      "notes": "",
+      "updated_at": "2026-02-18 20:31:38"
+    },
+    {
+      "mission_id": "sc-phase2-2026-02-16",
+      "title": "OpenClaw Cost Optimization & Star Command Phase 2",
+      "status": "completed",
+      "created_at": "2026-02-17 00:23:22",
+      "notes": "",
+      "updated_at": "2026-02-17 00:23:22"
+    }
+  ],
+  "status_counts": {
+    "completed": 11,
+    "planning": 12,
+    "active": 2
+  },
+  "updated_at": "2026-03-18T05:30:10.306549",
+  "total": 25
+}

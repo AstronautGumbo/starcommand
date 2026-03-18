@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Command Dashboard</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --text: #e2e8f0;
+            --green: #22c55e;
+            --amber: #f59e0b;
+            --red: #ef4444;
+            --gray: #64748b;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { color: var(--accent); margin-bottom: 8px; }
+        .subtitle { color: #94a3b8; margin-bottom: 32px; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #334155;
+            background: var(--card);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .filter-btn.active {
+            background: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+        }
+        .mission-list {
+            display: grid;
+            gap: 16px;
+        }
+        .mission-card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gray);
+        }
+        .mission-card.completed { border-left-color: var(--green); }
+        .mission-card.active { border-left-color: var(--accent); }
+        .mission-card.queued { border-left-color: var(--amber); }
+        .mission-card.planning { border-left-color: var(--gray); }
+        .mission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .mission-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+        }
+        .mission-id {
+            font-size: 14px;
+            color: #64748b;
+            margin-left: 8px;
+        }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-completed { background: rgba(34, 197, 94, 0.2); color: var(--green); }
+        .status-active { background: rgba(56, 189, 248, 0.2); color: var(--accent); }
+        .status-queued { background: rgba(245, 158, 11, 0.2); color: var(--amber); }
+        .status-planning { background: rgba(100, 116, 139, 0.2); color: var(--gray); }
+        .mission-notes {
+            color: #94a3b8;
+            font-size: 14px;
+            margin: 0;
+        }
+        .mission-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #64748b;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card);
+            border: none;
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        body.light {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+        }
+        .back-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 24px;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
+    
+    <div class="container">
+        <a href="../" class="back-link">← Back to Calculators</a>
+        
+        <h1>⭐ Star Command Dashboard</h1>
+        <p class="subtitle">Mission tracker for ModsPack project • Last updated: 2026-03-18 05:30:10</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">25</div>
+                <div class="stat-label">Total Missions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--green);">11</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--accent);">2</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--amber);">0</div>
+                <div class="stat-label">Queued</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--gray);">12</div>
+                <div class="stat-label">Planning</div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterStatus('all')">All</button>
+            <button class="filter-btn" onclick="filterStatus('completed')">Completed</button>
+            <button class="filter-btn" onclick="filterStatus('active')">Active</button>
+            <button class="filter-btn" onclick="filterStatus('queued')">Queued</button>
+            <button class="filter-btn" onclick="filterStatus('planning')">Planning</button>
+        </div>
+        
+        <div class="mission-list" id="missionList"></div>
+    </div>
+    
+    <script>
+        const missions = [
+        {
+                "mission_id": "arch-001-git-backup",
+                "title": "Git Backup \u2014 Workspace Private Repo",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-002-daily-log-format",
+                "title": "Standardize Daily Log Format",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-003-star-command-truth",
+                "title": "Star Command as Project State Truth",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-004-workspace-commit-routine",
+                "title": "Automated Workspace Commit Routine",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-005-memory-quality-review",
+                "title": "Memory Search Quality Audit",
+                "status": "planning",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-006-cross-channel-memory",
+                "title": "Cross-Channel Memory Consistency",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-007-matt-patterns-log",
+                "title": "Matt-Patterns Learning Log",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-008-research-memo-backfill",
+                "title": "Research Memo Backfill",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "arch-009-heartbeat-verify",
+                "title": "Heartbeat Recovery Verification",
+                "status": "completed",
+                "created_at": "2026-02-18 20:45:58",
+                "notes": "",
+                "updated_at": "2026-02-18 20:45:58"
+        },
+        {
+                "mission_id": "backup-secondary-001",
+                "title": "Secondary Backup Destination",
+                "status": "planning",
+                "created_at": "2026-02-18 23:23:52",
+                "notes": "",
+                "updated_at": "2026-02-18 23:23:52"
+        },
+        {
+                "mission_id": "mission-001",
+                "title": "Model selection & cost optimization",
+                "status": "completed",
+                "created_at": "2026-02-16 09:00:00",
+                "notes": "",
+                "updated_at": "2026-02-16 09:00:00"
+        },
+        {
+                "mission_id": "mission-002",
+                "title": "Hardware evaluation",
+                "status": "completed",
+                "created_at": "2026-02-16 11:00:00",
+                "notes": "",
+                "updated_at": "2026-02-16 11:00:00"
+        },
+        {
+                "mission_id": "mission-003",
+                "title": "Build Star Command (LifeOS)",
+                "status": "active",
+                "created_at": "2026-02-16 13:31:00",
+                "notes": "",
+                "updated_at": "2026-02-16 13:31:00"
+        },
+        {
+                "mission_id": "mission-004",
+                "title": "Income generation strategy",
+                "status": "planning",
+                "created_at": "2026-02-16 10:00:00",
+                "notes": "",
+                "updated_at": "2026-02-16 10:00:00"
+        },
+        {
+                "mission_id": "mission-compb-001",
+                "title": "Launch ModsPack MVP",
+                "status": "active",
+                "created_at": "2026-02-17T23:04:08.475006",
+                "notes": "",
+                "updated_at": "2026-02-17T23:04:08.475006"
+        },
+        {
+                "mission_id": "mission-compb-002",
+                "title": "Orphan Corrugated Marketplace",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-003",
+                "title": "Truckload Density Calculator",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-004",
+                "title": "Stack Strength Calculator",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-005",
+                "title": "Scope of Work Assistant",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-006",
+                "title": "Forecasting & Planning Assistant",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-007",
+                "title": "ISTA Packaging Lab Simulator",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-008",
+                "title": "AI Packaging Engineer",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "mission-compb-009",
+                "title": "Lead Generator & Converting Assistant",
+                "status": "planning",
+                "created_at": "2026-02-17T23:17:36.628675",
+                "notes": "",
+                "updated_at": "2026-02-17T23:17:36.628675"
+        },
+        {
+                "mission_id": "model-overhaul",
+                "title": "Model Routing Overhaul Session",
+                "status": "planning",
+                "created_at": "2026-02-18 20:31:38",
+                "notes": "",
+                "updated_at": "2026-02-18 20:31:38"
+        },
+        {
+                "mission_id": "sc-phase2-2026-02-16",
+                "title": "OpenClaw Cost Optimization & Star Command Phase 2",
+                "status": "completed",
+                "created_at": "2026-02-17 00:23:22",
+                "notes": "",
+                "updated_at": "2026-02-17 00:23:22"
+        }
+];
+        
+        let currentFilter = 'all';
+        
+        function renderMissions() {
+            const container = document.getElementById('missionList');
+            const filtered = currentFilter === 'all' 
+                ? missions 
+                : missions.filter(m => m.status === currentFilter);
+            
+            container.innerHTML = filtered.map(mission => `
+                <div class="mission-card ${mission.status}">
+                    <div class="mission-header">
+                        <h3 class="mission-title">
+                            ${mission.title}
+                            <span class="mission-id">#${mission.mission_id}</span>
+                        </h3>
+                        <span class="status-badge status-${mission.status}">${mission.status}</span>
+                    </div>
+                    ${mission.notes ? `<p class="mission-notes">${mission.notes}</p>` : ''}
+                    <div class="mission-meta">
+                        <span>Created: ${new Date(mission.created_at).toLocaleDateString()}</span>
+                        ${mission.updated_at ? `<span>Updated: ${new Date(mission.updated_at).toLocaleDateString()}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterStatus(status) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === status);
+            });
+            renderMissions();
+        }
+        
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+            localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        }
+        
+        if (localStorage.getItem('theme') === 'light') {
+            toggleTheme();
+        }
+        
+        renderMissions();
+    </script>
+</body>
+</html>
